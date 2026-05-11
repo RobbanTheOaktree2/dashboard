@@ -1,1 +1,18 @@
-
+body {
+    margin: 0px;
+    padding: 0px;
+}
+#grid-container {
+    display: grid;
+    grid-template-columns: "morgonbild";
+    grid-template-rows: "morgonbild";
+}
+#morgonbild {
+    grid-area: "morgonbild";
+    width: 100%;
+    height: auto;
+}
+#citat {
+    grid-area: "morgonbild";
+    width: 100%;
+}
