@@ -1,18 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <div class="grid-container">
-        <img src="img/morgonbild.jpg" alt="En vacker soluppgång över en sjö i Sverige." id="morgonbild">
-    </div>
-    <div id="citat">
+        <section id="hem">
+            <img src="img/morgonbild.jpg" alt="En vacker soluppgång över en sjö i Sverige." id="morgonbild">
+            <h1 id="godmorgon" class="lora-font">God morgon</h1>
+            <h2 id="datumtid" class="lora-font">Kan inte hämta datum och tid</h2>
+        </section>
 
+        <div id="citat">
+            <h1 class="lora-font">Hejsan</h1>
+        </div>
+
+        <section id="vader">
+            <h2>Väder</h2>
+            <p id="vader-info" class="lora-font">Hämtar väderdata...</p>
+        </section>
     </div>
+
 </body>
 </html>

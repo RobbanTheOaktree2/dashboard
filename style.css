@@ -1,18 +1,121 @@
 body {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
-#grid-container {
+
+.lora-font {
+  font-family: "Lora", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.grid-container {
     display: grid;
-    grid-template-columns: "morgonbild";
-    grid-template-rows: "morgonbild";
+    grid-template-columns: 33.333% 33.3333% 33.333%;
+    grid-template-rows: 33.333% 33.333% 33.333%;
+    grid-template-areas: "hem hem hem" "citat citat citat" "vader vader vader";
+    height: 300vh;
+    position: relative;
 }
+
+
+
+#hem{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    grid-area: hem;
+}
+
 #morgonbild {
-    grid-area: "morgonbild";
     width: 100%;
-    height: auto;
+    height: 100vh;
+
+    object-fit: cover;
+    object-position: center;
 }
-#citat {
-    grid-area: "morgonbild";
+
+#godmorgon {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
+    color: white;
+    text-align: center;
+    z-index: 1;
+    margin: 0;
+    padding: 0.5rem;
+    text-shadow: 0 0 10px rgba(0,0,0,0.7);
+    
+    font-size: 4rem;
+    font-family: 'Lora', serif;
+}
+
+#datumtid{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 1;
+    margin: 0;
+    padding: 0.5rem;
+    
+    text-shadow: 0 0 10px rgba(0,0,0,0.7);
+    color: white;
+    text-align: center;
+    font-size: 3rem;
+}
+
+
+
+#citat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+
+    padding: 20px;
+    grid-area: citat;
+}
+
+#vader {
+    grid-area: vader;
+}
+
+
+
+@media (max-width: 900px) {
+
+    #citat {
+        font-size: 2rem;
+    }
+
+    #morgonbild {
+        object-position: center;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .grid-container {
+        height: 150vh;
+    }
+
+    #morgonbild {
+        height: 150vh;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    #citat {
+        font-size: 1.5rem;
+        padding: 10px;
+    }
 }
