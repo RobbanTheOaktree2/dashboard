@@ -56,7 +56,7 @@ body {
 
 #datumtid{
     position: absolute;
-    top: 30%;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
@@ -76,15 +76,28 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 
     color: white;
-    font-size: 3rem;
+    font-size: 2rem;
     text-align: center;
 
     padding: 20px;
     grid-area: citat;
+    background: linear-gradient(180deg,
+    #4a7a8a 0%,    /* Ljusare blågrå med lite värme – matchar himlen */
+    #4a7a6a 40%,   /* Blågrön med varmare ton – dimman över vattnet */
+    #4a6642 100%); /* Jordigt skogsgrönt */
 }
 
+#citat-text {
+    max-width: 1000px;
+    text-align: center;
+}
+#författare {
+    max-width: 1000px;
+    text-align: center;
+}
 #vader {
     grid-area: vader;
 }

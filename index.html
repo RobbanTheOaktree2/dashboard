@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,18 +17,22 @@
         <section id="hem">
             <img src="img/morgonbild.jpg" alt="En vacker soluppgång över en sjö i Sverige." id="morgonbild">
             <h1 id="godmorgon" class="lora-font">God morgon</h1>
-            <h2 id="datumtid" class="lora-font">Kan inte hämta datum och tid</h2>
+            <h2 id="datumtid" class="lora-font">Hämtar datum och tid...</h2>
         </section>
 
         <div id="citat">
-            <h1 class="lora-font">Hejsan</h1>
+            <p id="citat-text" class="lora-font">Laddar citat...</p>
+            <p id="författare" class="lora-font"></p>
         </div>
 
         <section id="vader">
-            <h2>Väder</h2>
+            <h2 class="lora-font">Väder</h2>
             <p id="vader-info" class="lora-font">Hämtar väderdata...</p>
         </section>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>
