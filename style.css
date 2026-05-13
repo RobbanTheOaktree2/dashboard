@@ -9,6 +9,8 @@ body {
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
+  color: white;
+  text-align: center;
 }
 
 .grid-container {
@@ -85,24 +87,61 @@ body {
     padding: 20px;
     grid-area: citat;
     background: linear-gradient(180deg,
-    #4a7a8a 0%,    /* Ljusare blågrå med lite värme – matchar himlen */
-    #4a7a6a 40%,   /* Blågrön med varmare ton – dimman över vattnet */
-    #4a6642 100%); /* Jordigt skogsgrönt */
+    #4a7a8a 0%,
+    #4a7a6a 40%,
+    #4a6642 100%);
 }
 
 #citat-text {
     max-width: 1000px;
     text-align: center;
 }
+
 #författare {
     max-width: 1000px;
     text-align: center;
 }
-#vader {
+
+
+
+#vader_container {
     grid-area: vader;
+
+    display: grid;
+    grid-template-columns: 33.333% 33.3333% 33.333%;
+    grid-template-rows: 100%;
+    grid-template-areas: "vader1 vader2 vader3";
+    height: 100vh;
+    background: linear-gradient(180deg,
+    #4a6642 0%,
+    #4a7a6a 40%,
+    #4a7a8a 100%);
+}
+
+#vader1{
+    grid-area: vader1;
+
+    position: relative;
+    border-right: 1px solid white;
+   
 }
 
 
+#vader2{
+    grid-area: vader2;
+
+    position: relative;
+    border-right: 1px solid white;
+    border-left: 1px solid white;
+}
+
+#vader3{
+    grid-area: vader3;
+
+    position: relative;
+    border-left: 1px solid white;
+
+}
 
 @media (max-width: 900px) {
 
@@ -117,12 +156,7 @@ body {
 
 @media (max-width: 600px) {
 
-    .grid-container {
-        height: 150vh;
-    }
-
     #morgonbild {
-        height: 150vh;
         object-fit: cover;
         object-position: center;
     }
