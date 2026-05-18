@@ -29,44 +29,43 @@ const symbolToEmoji = {
 };
 
 function getCitat() {
-    $.ajax({
-        url: "https://dummyjson.com/quotes/random",
-        method: "GET",
-        success: function(data) {
-            $("#citat-text").text(data.quote);
-            $("#författare").text("- " + data.author);
-        },
-        error: function() {
-            $("#citat-text").text("Kunde inte hämta citat");
-        }
-    });
+  $.ajax({
+      url: "https://dummyjson.com/quotes/random",
+      method: "GET",
+      success: function(data) {
+          $("#citat-text").text(data.quote);
+          $("#författare").text("- " + data.author);
+      },
+      error: function() {
+          $("#citat-text").text("Kunde inte hämta citat");
+      }
+  });
 }
 
 function uppdateradatum() {
-    const nu = new Date();
+  const nu = new Date();
 
-    const datum = nu.toLocaleDateString("sv-SE", {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric"
-    });
+  const datum = nu.toLocaleDateString("sv-SE", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
 
-    const tid = nu.toLocaleTimeString("sv-SE");
+  const tid = nu.toLocaleTimeString("sv-SE");
 
-    $("#datumtid").text(datum + " • " + tid);
+  $("#datumtid").text(datum + " • " + tid);
 }
 
 function getVader() {
-  navigator.geolocation.getCurrentPosition(function(pos) {
-    if(!navigator.geolocation) {
-      console.log("Geolocation is not supported by this browser.");
-      return;
-    }
+  if (!navigator.geolocation) {
+    console.log("Geolocation stöds inte av den här webbläsaren.");
+    return;
+  }
 
+  navigator.geolocation.getCurrentPosition(function(pos) {
     const lat = pos.coords.latitude.toFixed(6);
     const lon = pos.coords.longitude.toFixed(6);
-
     const url = `https://opendata-download-metfcst.smhi.se/api/category/snow1g/version/1/geotype/point/lon/${lon}/lat/${lat}/data.json`;
 
     $.ajax({
@@ -74,21 +73,31 @@ function getVader() {
       method: "GET",
       dataType: "json",
       success: function(myData) {
+        const nu = new Date();
+        const timmeNu = nu.getHours();
+        const datumNu = nu.toISOString().slice(0,10);
+        console.log("Nuvarande timme:", timmeNu);
+        middagSteg = myData.timeSeries.filter(s => s.time.includes("T12:"));
+        console.log("Middagsteg:", middagSteg);
+        
 
-        console.log("Väderdata:", myData);
-        const firstStep = myData.timeSeries[0];
-        const temp = firstStep.data.air_temperature;
-        const vind = firstStep.data.wind_speed;
-        const symbol = firstStep.data.symbol_code;
-        const vindbyar = firstStep.data.wind_speed_of_gust;
-        const nederbord = firstStep.data.precipitation_amount_mean;
-        const lufttryck = firstStep.data.air_pressure_at_mean_sea_level;
+        if(timmeNu > 12) {
+          middagSteg[0] = myData.timeSeries.find(s => s.time.includes(datumNu + "T" + timmeNu.toString() + ":"));
+        }
+        for (let i = 0; i < 7; i++) {
+          const n = i + 1;
+          const d = middagSteg[i].data;
 
-        $("#temperatur").text("Temperatur: " + temp + " " + symbolToEmoji[symbol]);
-        $("#vind").text("Vind: " + vind);
-        $("#vindbyar").text("Vindbyar: " + vindbyar);
-        $("#nederbord").text("Nederbörd: " + nederbord);
-        $("#lufttryck").text("Lufttryck: " + lufttryck);
+          const dagDatum = new Date();
+          dagDatum.setDate(dagDatum.getDate() + i);
+          const dagNamn = dagDatum.toLocaleDateString("sv-SE", { weekday: "long" });
+          $("#vaderDag" + n).text(dagNamn);
+          $("#temperatur" + n).text("Temperatur: " + d.air_temperature + "°C " + symbolToEmoji[d.symbol_code]);
+          $("#vind" + n).text("Vind: " + d.wind_speed + " m/s");
+          $("#vindbyar" + n).text("Vindbyar: " + d.wind_speed_of_gust + " m/s");
+          $("#nederbord" + n).text("Nederbörd: " + d.precipitation_amount_mean + " mm");
+          $("#lufttryck" + n).text("Lufttryck: " + d.air_pressure_at_mean_sea_level + " hPa");
+        }
       },
       error: function(err) {
         console.log("Fel:", err);
@@ -98,10 +107,10 @@ function getVader() {
 }
 
 $(document).ready(function() {
-    getCitat();
-    uppdateradatum();
-    getVader();
+  getCitat();
+  uppdateradatum();
+  getVader();
 
-    setInterval(uppdateradatum, 1000);
-    setInterval(getVader, 10 * 60 * 1000); 
+  setInterval(uppdateradatum, 1000);
+  setInterval(getVader, 10 * 60 * 1000); 
 });
