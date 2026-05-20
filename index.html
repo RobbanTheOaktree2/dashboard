@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <meta name="description" content="En personlig dashboard som visar datum, tid, väderprognos och inspirerande citat.">
 
     <link rel="stylesheet" href="style.css">
 
@@ -11,73 +12,83 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 
+    <meta http-equiv="Content-Security-Policy" 
+      content="
+      default-src 'self'; 
+      script-src 'self' https://code.jquery.com 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE=';
+      style-src 'self' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com;
+      connect-src 'self' https://dummyjson.com/quotes/random https://opendata-download-metfcst.smhi.se/;">
+
 </head>
 <body>
+    <main>
     <div class="grid-container">
-        <section id="hem">
-            <img src="img/morgonbild.jpg" alt="En vacker soluppgång över en sjö i Sverige." id="morgonbild">
-            <h1 id="godmorgon" class="lora-font">God morgon</h1>
-            <h2 id="datumtid" class="lora-font">Hämtar datum och tid...</h2>
-        </section>
+            <section id="hem">
+                <img src="img/morgonbild.jpg" alt="En vacker soluppgång över en sjö i Sverige." id="morgonbild">
+                <h1 id="godmorgon" class="lora-font">God morgon</h1>
+                <h2 id="datumtid" class="lora-font">Hämtar datum och tid...</h2>
+            </section>
 
         <section id="citat">
+            <h2 id="citat-header" class="lora-font">Dagens citat</h2>
             <p id="citat-text" class="lora-font">Laddar citat...</p>
             <p id="författare" class="lora-font"></p>
         </section>
 
         <section id="vader_container">
+            <h2 id="vader-header" class="lora-font">Väderprognos 7 dagar</h2>
             <section id="vader1">  
-                <h1 id="vaderDag1" class="lora-font"></h1>
-                <div id="temperatur1" class="lora-font"></div>
+                <h3 id="vaderDag1" class="lora-font">Dag 1</h3>
+                <div id="temperatur1"  class="lora-font">Laddar väder...</div>
                 <div id="vind1" class="lora-font"></div>
                 <div id="vindbyar1" class="lora-font"></div>
                 <div id="nederbord1" class="lora-font"></div>
                 <div id="lufttryck1" class="lora-font"></div>
             </section>
             <section id="vader2">
-                <h1 id="vaderDag2" class="lora-font">Dag 2</h1>
-                <div id="temperatur2" class="lora-font"></div>
+                <h3 id="vaderDag2" class="lora-font">Dag 2</h3>
+                <div id="temperatur2" class="lora-font">Laddar väder...</div>
                 <div id="vind2" class="lora-font"></div>
                 <div id="vindbyar2" class="lora-font"></div>
                 <div id="nederbord2" class="lora-font"></div>
                 <div id="lufttryck2" class="lora-font"></div>
             </section>
             <section id="vader3">
-                <h1 id="vaderDag3" class="lora-font">Dag 3</h1>
-                <div id="temperatur3" class="lora-font"></div>
+                <h3 id="vaderDag3" class="lora-font">Dag 3</h3>
+                <div id="temperatur3" class="lora-font">Laddar väder...</div>
                 <div id="vind3" class="lora-font"></div>
                 <div id="vindbyar3" class="lora-font"></div>
                 <div id="nederbord3" class="lora-font"></div>
                 <div id="lufttryck3" class="lora-font"></div>
             </section>
             <section id="vader4">
-                <h1 id="vaderDag4" class="lora-font">Dag 4</h1>
-                <div id="temperatur4" class="lora-font"></div>
+                <h3 id="vaderDag4" class="lora-font">Dag 4</h3>
+                <div id="temperatur4" class="lora-font">Laddar väder...</div>
                 <div id="vind4" class="lora-font"></div>
                 <div id="vindbyar4" class="lora-font"></div>
                 <div id="nederbord4" class="lora-font"></div>
                 <div id="lufttryck4" class="lora-font"></div>
-                <div id=""></div>
             </section>
             <section id="vader5">
-                <h1 id="vaderDag5" class="lora-font">Dag 5</h1>
-                <div id="temperatur5" class="lora-font"></div>
+                <h3 id="vaderDag5" class="lora-font">Dag 5</h3>
+                <div id="temperatur5" class="lora-font">Laddar väder...</div>
                 <div id="vind5" class="lora-font"></div>
                 <div id="vindbyar5" class="lora-font"></div>
                 <div id="nederbord5" class="lora-font"></div>
                 <div id="lufttryck5" class="lora-font"></div>
             </section>
             <section id="vader6">
-                <h1 id="vaderDag6" class="lora-font">Dag 6</h1>
-                <div id="temperatur6" class="lora-font"></div>
+                <h3 id="vaderDag6" class="lora-font">Dag 6</h3>
+                <div id="temperatur6" class="lora-font">Laddar väder...</div>
                 <div id="vind6" class="lora-font"></div>
                 <div id="vindbyar6" class="lora-font"></div>
                 <div id="nederbord6" class="lora-font"></div>
                 <div id="lufttryck6" class="lora-font"></div>
             </section>
             <section id="vader7">
-                <h1 id="vaderDag7" class="lora-font">Dag 7</h1>
-                <div id="temperatur7" class="lora-font"></div>
+                <h3 id="vaderDag7" class="lora-font">Dag 7</h3>
+                <div id="temperatur7" class="lora-font">Laddar väder...</div>
                 <div id="vind7" class="lora-font"></div>
                 <div id="vindbyar7" class="lora-font"></div>
                 <div id="nederbord7" class="lora-font"></div>
@@ -85,7 +96,7 @@
             </section>
         </section>
     </div>
-
+</main>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js"></script>
 

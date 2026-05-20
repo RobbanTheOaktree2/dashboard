@@ -92,6 +92,12 @@ body {
     #4a6642 100%);
 }
 
+#citat-header {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
 #citat-text {
     max-width: 1000px;
     text-align: center;
@@ -106,11 +112,10 @@ body {
 
 #vader_container {
     grid-area: vader;
-
     display: grid;
-    grid-template-columns: 33.333% 33.3333% 33.333%;
-    grid-template-rows: 33.333% 33.333% 33.333%;
-    grid-template-areas: "vader1 vader2 vader3" "vader1 vader4 vader5" "vader1 vader6 vader7";
+    grid-template-columns: 33.333% 33.333% 33.333%;
+    grid-template-rows: 13% 29% 29% 29%;
+    grid-template-areas: "vader-header vader-header vader-header" "vader1 vader2 vader3" "vader1 vader4 vader5" "vader1 vader6 vader7";
     height: 100vh;
     background: linear-gradient(180deg,
     #4a6642 0%,
@@ -118,12 +123,17 @@ body {
     #4a7a8a 100%);
 }
 
+#vader-header {
+    grid-area: vader-header;
+    font-size: 2rem;
+}
+
 #vader1{
     grid-area: vader1;
 
     position: relative;
     border: 1px solid white;
-   
+    font-size: 1.5rem;
 }
 
 #vader2{
@@ -148,7 +158,6 @@ body {
    
 }
 
-
 #vader5{
     grid-area: vader5;
 
@@ -163,6 +172,7 @@ body {
     border: 1px solid white;
 
 }
+
 #vader7{
     grid-area: vader7;
 
@@ -174,25 +184,46 @@ body {
 
 
 @media (max-width: 900px) {
-
-    #citat {
-        font-size: 2rem;
+    #vader1 {
+        font-size: 1rem;
     }
-
-    #morgonbild {
-        object-position: center;
+    #vader2 {
+        font-size: 0.9rem;
+    }
+    #vader3 {
+        font-size: 0.9rem;
+    }
+    #vader4 {
+        font-size: 0.9rem;
+    }
+    #vader5 {
+        font-size: 0.9rem;
+    }
+    #vader6 {
+        font-size: 0.9rem;
+    }
+    #vader7 {
+        font-size: 0.9rem;
     }
 }
 
 @media (max-width: 600px) {
-
-    #morgonbild {
-        object-fit: cover;
-        object-position: center;
-    }
-
     #citat {
         font-size: 1.5rem;
         padding: 10px;
     }
+
+    #vader_container {
+    grid-area: vader;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 10% 22.5% 22.5% 22.5% 22.5%;
+    grid-template-areas: 
+    "vader-header vader-header" 
+    "vader1 vader2" 
+    "vader1 vader3" 
+    "vader4 vader5"
+    "vader6 vader7";
+    height: 150vh;
+}
 }

@@ -59,7 +59,7 @@ function uppdateradatum() {
 
 function getVader() {
   if (!navigator.geolocation) {
-    console.log("Geolocation stöds inte av den här webbläsaren.");
+    $("#vader-header").text("Geolocation stöds inte av den här webbläsaren.");
     return;
   }
 
@@ -77,13 +77,14 @@ function getVader() {
         const timmeNu = nu.getHours();
         const datumNu = nu.toISOString().slice(0,10);
         console.log("Nuvarande timme:", timmeNu);
+        console.log("myData:", myData);
         middagSteg = myData.timeSeries.filter(s => s.time.includes("T12:"));
         console.log("Middagsteg:", middagSteg);
-        
 
         if(timmeNu > 12) {
           middagSteg[0] = myData.timeSeries.find(s => s.time.includes(datumNu + "T" + timmeNu.toString() + ":"));
         }
+
         for (let i = 0; i < 7; i++) {
           const n = i + 1;
           const d = middagSteg[i].data;
@@ -91,7 +92,7 @@ function getVader() {
           const dagDatum = new Date();
           dagDatum.setDate(dagDatum.getDate() + i);
           const dagNamn = dagDatum.toLocaleDateString("sv-SE", { weekday: "long" });
-          $("#vaderDag" + n).text(dagNamn);
+          $("#vaderDag" + n).text(dagNamn.charAt(0).toUpperCase() + dagNamn.slice(1));
           $("#temperatur" + n).text("Temperatur: " + d.air_temperature + "°C " + symbolToEmoji[d.symbol_code]);
           $("#vind" + n).text("Vind: " + d.wind_speed + " m/s");
           $("#vindbyar" + n).text("Vindbyar: " + d.wind_speed_of_gust + " m/s");
@@ -101,6 +102,7 @@ function getVader() {
       },
       error: function(err) {
         console.log("Fel:", err);
+        $("#vader-header").text("Kunde inte hämta väderinformation.");
       }
     });
   });
@@ -113,4 +115,5 @@ $(document).ready(function() {
 
   setInterval(uppdateradatum, 1000);
   setInterval(getVader, 10 * 60 * 1000); 
+  setInterval(getCitat, 120 * 1000);
 });
