@@ -35,11 +35,11 @@ function getCitat() {
 
     success: function(data) {
       $("#citat-text").text(data.quote);
-      $("#författare").text("- " + data.author);
+      $("#författare").text("- " + data.author); // Hämtar och visar citat och författare
     },
 
     error: function() {
-      $("#citat-text").text("Kunde inte hämta citat");
+      $("#citat-text").text("Kunde inte hämta citat"); //felmeddelande om det inte går att hämta citat
     }
   });
 }
@@ -52,38 +52,22 @@ function uppdateradatum() {
     year: "numeric",
     month: "long",
     day: "numeric"
-  });
+  }); // Hämtar och formaterar datumet på svenska
 
-  const tid = nu.toLocaleTimeString("sv-SE");
+  const tid = nu.toLocaleTimeString("sv-SE"); // Hämtar tiden på svenska
 
   $("#datumtid").text(datum + " • " + tid);
 }
 
 function getVader() {
-
-  console.log("Hej");
-
-  // Kontrollera om geolocation finns
-  if (!navigator.geolocation) {
-    $("#vader-header").text(
-      "Geolocation stöds inte av den här webbläsaren."
-    );
-    return;
-  }
-
   // Hämta position
   navigator.geolocation.getCurrentPosition(
 
-    // SUCCESS CALLBACK
     function(pos) {
 
-      console.log("Position tillåten");
-
       const lat = pos.coords.latitude.toFixed(6);
-      const lon = pos.coords.longitude.toFixed(6);
+      const lon = pos.coords.longitude.toFixed(6); // Hämtar användarens latitud och longitud
 
-      console.log("Lat:", lat);
-      console.log("Lon:", lon);
 
       const url =
         `https://opendata-download-metfcst.smhi.se/api/category/snow1g/version/1/geotype/point/lon/${lon}/lat/${lat}/data.json`;
@@ -99,14 +83,9 @@ function getVader() {
           const timmeNu = nu.getHours();
           const datumNu = nu.toISOString().slice(0, 10);
 
-          console.log("Nuvarande timme:", timmeNu);
-          console.log("myData:", myData);
-
           let middagSteg = myData.timeSeries.filter(
-            s => s.time.includes("T12:")
+            s => s.time.includes("T12:") //Letar upp alla timeseries från kl 12
           );
-
-          console.log("Middagsteg:", middagSteg);
 
           if (timmeNu > 12) {
 
@@ -114,10 +93,11 @@ function getVader() {
               s => s.time.includes(
                 datumNu + "T" + timmeNu.toString() + ":"
               )
-            );
+            ); // Ser till att den första dagen i väderprognosen är den som gäller för kl 12 idag, 
+            // om det redan är efter kl 12.
           }
 
-          for (let i = 0; i < 7; i++) {
+          for (let i = 0; i < 7; i++) { // Loopar igenom de 7 första dagarna i väderprognosen
 
             const n = i + 1;
             const d = middagSteg[i].data;
@@ -133,14 +113,14 @@ function getVader() {
             $("#vaderDag" + n).text(
               dagNamn.charAt(0).toUpperCase() +
               dagNamn.slice(1)
-            );
+            ); // Lägger in dagens namn i väderprognosen
 
             $("#temperatur" + n).text(
               "Temperatur: " +
               d.air_temperature +
               "°C " +
               symbolToEmoji[d.symbol_code]
-            );
+            ); // Lägger in temperatur och vädersymbol i väderprognosen
 
             $("#vind" + n).text(
               "Vind: " +
@@ -174,6 +154,7 @@ function getVader() {
           $("#vader-header").text(
             "Kunde inte hämta väderinformation."
           );
+          // Felmeddelande om det inte går att hämta väderinformation
         }
       });
     },
@@ -183,6 +164,7 @@ function getVader() {
         $("#vader-header").text(
           "Du måste tillåta platsåtkomst för att se vädret."
         );
+        // Felmeddelande om det inte går att hämta position
     }
   );
 }
@@ -198,4 +180,6 @@ $(document).ready(function() {
   setInterval(getVader, 10 * 60 * 1000);
 
   setInterval(getCitat, 120 * 1000);
+
+  //Uppdaterar datum och tid varje sekund, väder varje 10 minuter och citat varje 2 minuter
 });
