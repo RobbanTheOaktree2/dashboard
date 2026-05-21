@@ -50,7 +50,9 @@ body {
     z-index: 1;
     margin: 0;
     padding: 0.5rem;
-    text-shadow: 0 0 10px rgba(0,0,0,0.7);
+    text-shadow:
+  0 2px 4px rgba(0,0,0,0.7),
+  0 6px 18px rgba(0,0,0,0.5);
     
     font-size: 4rem;
     font-family: 'Lora', serif;
@@ -66,7 +68,9 @@ body {
     margin: 0;
     padding: 0.5rem;
     
-    text-shadow: 0 0 10px rgba(0,0,0,0.7);
+    text-shadow:
+  0 2px 4px rgba(0,0,0,0.7),
+  0 6px 18px rgba(0,0,0,0.5);
     color: white;
     text-align: center;
     font-size: 3rem;
